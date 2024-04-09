@@ -2,15 +2,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Vector3 _movementDirection;
+    private Purposes _purpose;
+    [SerializeField] private float _speed;
 
     private void Update()
-    {
-        transform.Translate(_movementDirection * Time.deltaTime);
+    {       
+        var direction = (_purpose.transform.position - transform.position).normalized;
+        
+        //transform.LookAt(_purpose.transform);
+        transform.Translate(direction * _speed);
     }
 
-    public void Direction(Vector3 movementDirection)
+    public void Direction(Purposes purpose)
     {
-        _movementDirection = movementDirection;
+        _purpose = purpose;
     }
 }
